@@ -1,0 +1,222 @@
+#Initialize values for the bounds
+#post production costs
+transpo = [0,0,0]
+drying = [0,0,0]
+dehulling = [0,0,0]
+sorting = [0,0,0]
+depulping = [0,0,0]
+
+#labor costs
+hauling = [0,0,0]
+pruning = [0,0,0]
+fertilizer_labor = [0,0,0]
+weeding = [0,0,0]
+spraying = [0,0,0]
+rejuvenation = [0,0,0]
+harvesting = [0,0,0]
+
+
+hectares = INPUT("how many hectares of land are planted with trees?")
+bearing = INPUT("how many of the trees are bearing?")
+non_bearing = INPUT("how many of the trees are non-bearing?")
+trees = bearing + non_bearing
+tree_perhectare = trees/hectares
+
+
+coffee_type = INPUT("Which type of Coffee will you sell? (fresh, dried, gcb, fresh and dried, fresh and gcb, dried and gcb, all)")
+dataset = INPUT("Please select the dataset that you will use for the cost bound")
+
+#Input Costs
+fert_apply = INPUT("Will you apply fertilizers?")
+IF fert_apply == yes:
+	fert_application = INPUT("To which coffee trees will you apply fertilizers? (bearing, non-bearing, both) ")
+	IF fert_application == bearing:
+		fert_percent = INPUT("Percent of bearing trees to be applied with fertilizers?")
+		fert_kg = INPUT("How many kilograms of fertilizers will be used for the bearing trees?")
+		fert_costperkg = INPUT("Cost per kilogram of fertilizers?")
+		fert_cost = (fert_kg * fert_costperkg) / (fert_percent * bearing)
+	IF fert_application == non-bearing:
+		fert_percent = INPUT("Percent of non bearing trees to be applied with fertilizers?")
+		fert_kg = INPUT("How many kilograms of fertilizers will be used for the non bearing trees?")
+		fert_costperkg = INPUT("Cost per kilogram of fertilizers?")
+		fert_cost = (fert_kg * fert_costperkg) / (fert_percent * non_bearing)
+	IF fert_application == both:
+		fert_percent = INPUT("Percent of total trees to be applied with fertilizers?")
+		fert_kg = INPUT("How many kilograms of fertilizers will be used?")
+		fert_costperkg = INPUT("Cost per kilogram of fertilizers?")
+		fert_cost = (fert_kg * fert_costperkg) / (fert_percent * trees)
+ELSE
+	fert_cost = 0
+
+herb_apply = INPUT("Will you apply herbicides?")
+IF herb_apply == yes:
+	herb_application = INPUT("To which coffee trees do you apply herbicides? (bearing, non-bearing, both) ")
+	IF herb_application == bearing:
+		herb_percent = INPUT("Percent of bearing trees to be applied with herbicides?")
+		herb_kg = INPUT("How many kilogram or liter of herbicides will be used for the bearing trees?")
+		herb_costperkg = INPUT("Cost per kilogram or liter of herbicides?")
+		herb_cost = (herb_kg * herb_costperkg) / (herb_percent * bearing)
+	IF herb_application == non-bearing:
+		herb_percent = INPUT("Percent of non-bearing trees to be applied with herbicides?")
+		herb_kg = INPUT("How many kilogram or liter of herbicides will be used for the non bearing trees?")
+		herb_costperkg = INPUT("Cost per kilogram or liter of herbicides?")
+		herb_cost = (herb_kg * herb_costperkg) / (herb_percent * non_bearing)
+	IF herb_application == both:
+		herb_percent = INPUT("Percent of total trees to be applied with herbicides?")
+		herb_kg = INPUT("How many kilogram or liter of herbicides will be used?")
+		herb_costperkg = INPUT("Cost per kilogram or liter of herbicides?")
+		herb_cost = (herb_kg * herb_costperkg) / (herb_percent * trees)
+ELSE
+	herb_cost = 0
+
+pest_apply = INPUT("Will you apply pesticides?")
+IF pest_apply == yes:
+	pest_application = INPUT("To which coffee trees do you apply pesticides? (bearing, non-bearing, both) ")
+	IF pest_application == bearing:
+		pest_percent = INPUT("Percent of bearing trees to be applied with pesticides?")
+		pest_kg = INPUT("How many kilogram or liter of pesticides will be used for the bearing trees?")
+		pest_costperkg = INPUT("Cost per kilogram or liter of pesticides?")
+		pest_cost = (pest_kg * pest_costperkg) / (pest_percent * bearing)
+	IF pest_application == non-bearing:
+		pest_percent = INPUT("Percent of non-bearing trees to be applied with pesticides?")
+		pest_kg = INPUT("How many kilogram or liter of pesticides will be used for the non bearing trees?")
+		pest_costperkg = INPUT("Cost per kilogram or liter of pesticides?")
+		pest_cost = (pest_kg * pest_costperkg) / (pest_percent * non_bearing)
+	IF pest_application == both:
+		pest_percent = INPUT("Percent of total trees to be applied with pesticides?")
+		pest_kg = INPUT("How many kilogram or liter of pesticides will be used?")
+		pest_costperkg = INPUT("Cost per kilogram or liter of pesticides?")
+		pest_cost = (pest_kg * pest_costperkg) / (pest_percent * trees)
+ELSE
+	pest_cost = 0
+
+
+cost_input = fert_cost + herb_cost + pest_cost
+cost_input_perhectare = cost_input / tree_perhectare
+
+#Post production Costs
+transpo_postprod_yesno = INPUT("spare costs for transpo?")
+IF transpo_postprod_yesno == yes:
+	transpo_postprod_yesno = 1
+ELSE:
+	transpo_postprod_yesno = 0
+
+if coffee_type == "dried" or "fresh and dried":
+	drying_postprod_yesno = INPUT("spare costs for drying?")
+	IF drying_postprod_yesno == yes:
+		drying_postprod_yesno = 1
+	ELSE:
+		drying_postprod_yesno = 0
+
+if coffee_type == "gcb" or "fresh and gcb" or "dried and gcb" or "all":
+	drying_postprod_yesno = INPUT("spare costs for drying?")
+	IF drying_postprod_yesno == yes:
+		drying_postprod_yesno = 1
+	ELSE:
+		drying_postprod_yesno = 0
+
+	dehulling_postprod_yesno = INPUT("spare costs for dehulling?")
+	IF dehulling_postprod_yesno == yes:
+		dehulling_postprod_yesno = 1
+	ELSE:
+		dehulling_postprod_yesno = 0
+
+	sorting_postprod_yesno = INPUT("spare costs for sorting?")
+	IF sorting_postprod_yesno == yes:
+		sorting_postprod_yesno = 1
+	ELSE:
+		sorting_postprod_yesno = 0
+
+	depulping_postprod_yesno = INPUT("spare costs for depulping?")
+	IF depulping_postprod_yesno == yes:
+		depulping_postprod_yesno = 1
+	ELSE:
+		depulping_postprod_yesno = 0
+
+#Labor Costs
+harvesting_labor_yesno = INPUT("spare costs for harvesting?")
+IF harvesting_labor_yesno == yes:
+	harvesting_labor_yesno = 1
+	harvesting_labor_percent = INPUT("Percent of bearing trees that you will be harvesting?")
+ELSE:
+	harvesting_labor_yesno = 0
+
+IF hauling_labor_yesno == yes:
+	hauling_labor_yesno = 1
+	hauling_labor_percent = INPUT("Percent of bearing trees that you will be hauling?")
+ELSE:
+	hauling_labor_yesno = 0
+
+pruning_labor_yesno = INPUT("spare costs for pruning?")
+IF pruning_labor_yesno == yes:
+	pruning_labor_yesno = 1
+	pruning_labor_percent_bearing = INPUT("Percent of bearing trees to be applied with pruning?")
+	pruning_labor_percent_nonbearing = INPUT("Percent of non-bearing trees to be applied with pruning?")
+ELSE
+	pruning_labor_yesno = 0
+
+fertilizer_labor_yesno = INPUT("spare costs for fertilizer labor?")
+IF fertilizer_labor_yesno == yes:
+	fertilizer_labor_yesno = 1
+	fertilizer_labor_percent_bearing = INPUT("Percent of bearing trees to be applied with fertilizer labor?")
+	fertilizer_labor_percent_nonbearing = INPUT("Percent of non-bearing trees to be applied with fertilizer labor?")
+ELSE
+	fertilizer_labor_yesno = 0
+
+weeding_labor_yesno = INPUT("spare costs for weeding?")
+IF weeding_labor_yesno == yes:
+	weeding_labor_yesno = 1
+	weeding_labor_percent_bearing = INPUT("Percent of bearing trees to be applied with weeding?")
+	weeding_labor_percent_nonbearing = INPUT("Percent of non-bearing trees to be applied with weeding?")
+ELSE
+	weeding_labor_yesno = 0
+
+spraying_labor_yesno = INPUT("spare costs for spraying?")
+IF spraying_labor_yesno == yes:
+	spraying_labor_yesno = 1
+	spraying_labor_percent_bearing = INPUT("Percent of bearing trees to be applied with spraying?")
+	spraying_labor_percent_nonbearing = INPUT("Percent of non bearing trees to be applied with spraying?")
+ELSE
+	spraying_labor_yesno = 0
+
+rejuvenation_labor_yesno = INPUT("spare costs for rejuvenation?")
+IF rejuvenation_labor_yesno == yes:
+	rejuvenation_labor_yesno = 1
+	rejuvenation_labor_percent = INPUT("Percent of bearing trees to be applied with rejuvenation?")
+	rejuvenation_labor_percent = INPUT("Percent of non bearing trees to be applied with rejuvenation?")
+ELSE
+	rejuvenation_labor_yesno = 0
+
+#Other Costs
+other_cost = INPUT("Please input the amount of cost you incurred for other costs: ")
+
+FOR i:3:
+#Labor Costs
+harvesting_perhectare[i] = harvesting[i] * harvesting_labor_yesno * (harvesting_labor_percent * (bearing/hectares))
+hauling_perhectare[i] = hauling[i] * hauling_labor_yesno * (hauling_labor_percent * (bearing/hectares))
+pruning_perhectare[i] = pruning[i] * pruning_labor_yesno * ((pruning_labor_percent_bearing + pruning_labor_percent_nonbearing) * tree_perhectare)
+fertilizer_perhectare[i] = fertilizer_labor[i] * fertilizing_labor_yesno * ((fertilizer_labor_percent_bearing + fertilizer_labor_percent_nonbearing) * tree_perhectare)
+weeding_perhectare[i] = weeding[i] * weedinglabor_yesno * ((weeding_labor_percent_bearing + weeding_labor_percent_nonbearing) * tree_perhectare)
+spraying_perhectare[i] = spraying[i] * sprayinglabor_yesno * ((spraying_labor_percent_bearing + spraying_labor_percent_nonbearing) * tree_perhectare)
+rejuvenation_perhectare[i] = rejuvenation[i] * rejuvenationlabor_yesno * ((rejuvenation_labor_percent_bearing + rejuvenation_labor_percent_nonbearing) * tree_perhectare)
+cost_labor_perhectare[i] = harvesting_perhectare[i] + hauling_perhectare[i] + pruning_perhectare[i] + fertilizer_perhectare[i] + weeding_perhectare[i] + spraying_perhectare[i] + rejuvenation_perhectare[i]
+
+#Post production:
+if coffee_type == "fresh":
+	transpo_perhectare[i] = transpo[i] * tree_perhectare * transpo_postprod_yesno
+	cost_postprod_perhectare[i] = transpo_perhectare[i]
+if coffee_type == "dried" or "fresh and dried":
+	transpo_perhectare[i] = transpo[i] * tree_perhectare * transpo_postprod_yesno
+	drying_perhectare[i] = drying[i] * (bearing/hectares) * drying_postprod_yesno
+	cost_postprod_perhectare[i] = transpo_perhectare[i] + drying_perhectare[i]
+if coffee_type == "gcb" or "fresh and gcb" or "dried and gcb" or "all":
+	transpo_perhectare[i] = transpo[i] * tree_perhectare * transpo_postprod_yesno
+	drying_perhectare[i] = drying[i] * (bearing/hectares) * drying_postprod_yesno
+	dehulling_perhectare[i] = dehulling[i] * (bearing/hectares) * dehulling_postprod_yesno
+	sorting_perhectare[i] = sorting[i] * (bearing/hectares) * sorting_postprod_yesno
+	depulping_perhectare[i] = depulping[i] * (bearing/hectares) * depulping_postprod_yesno
+	cost_postprod_perhectare[i] = transpo_perhectare[i] + drying_perhectare[i] + dehulling_perhectare[i] + sorting_perhectare[i] + depulping_perhectare[i]
+
+cost_total_perhectare[i] = cost_postprod_perhectare[i] + cost_labor_perhectare[i] + cost_input_perhectare + other_cost
+
+END
